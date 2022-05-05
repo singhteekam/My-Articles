@@ -1,18 +1,48 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const [data, setData] = React.useState(null);
+  // const [data, setData] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
+  let [articles, setArticles] = useState([]);
+
+  // React.useEffect(() => {
+  //   fetch("/api")
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data.message));
+  // }, []);
+
+  useEffect(() => {
+    fetch("/gfg")
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setArticles(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, []);
 
+
+
   return (
-    <h3> You will find my articles here soon...</h3>
+    <div>
+      <Navbar />
+
+      <ol className="m-2 pt-5" type="1">
+        {articles.map((article) => (
+          <li>
+            <h4>
+              <a target="_blank" href={article.gfgLink}>
+                {article.gfgTitle}
+              </a>
+            </h4>
+            <br />
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
 

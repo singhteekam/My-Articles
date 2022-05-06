@@ -48,11 +48,8 @@ app.get('/gfg', (req, res) => {
     else{
       res.json({totalArticles: "Not found"})
     }
-  });
-  
-
+  }); 
 });
-
 
 
 

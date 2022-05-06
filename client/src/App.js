@@ -34,8 +34,8 @@ function App() {
         {articles.map((article) => (
           <li>
             <h4>
-              <a target="_blank" href={article.articleTitle}>
-                {article.articleLink}
+              <a target="_blank" href={article.articleLink}>
+                {article.articleTitle}
               </a>
             </h4>
             <br />

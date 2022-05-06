@@ -12,9 +12,9 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // Handle GET requests to /api route
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
+// app.get("/api", (req, res) => {
+//   res.json({ message: "Hello from server!" });
+// });
 
 // All other GET requests not handled before will return our React app
 // app.get('*', (req, res) => {
@@ -30,20 +30,19 @@ app.get('/gfg', (req, res) => {
     if (!err && response.statusCode == 200) {
       const $ = cheerio.load(html);
 
-      let gfgArticleArray = [];
+      let articles = [];
 
       $('.contribute-ol .contribute-li a').each(function (i, e) {
 
-        let gfgData = {
-          gfgTitle: $(this).text(),
-          gfgLink: $(this).attr('href')
+        let gfgarticle = {
+          articleTitle: $(this).text(),
+          articleLink: $(this).attr('href')
         }
 
-        gfgArticleArray[i] = gfgData;
+        articles[i] = gfgarticle;
       });
-      // console.log(gfgArticleArray.length);
 
-      res.send(gfgArticleArray);
+      res.send(articles);
     }
     else{
       res.json({totalArticles: "Not found"})
